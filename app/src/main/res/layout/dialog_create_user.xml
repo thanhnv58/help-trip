@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="handler"
+            type="thanhnv.com.helpingtrips.view.handler.DialogCreateUserHandler"/>
+
+        <variable
+            name="viewModel"
+            type="thanhnv.com.helpingtrips.viewmodel.DialogCreateUserViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_dialog"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:text="Create new user"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/txt_guidline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_new_user"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_title"
+            android:layout_marginTop="@dimen/margin_top"
+            android:paddingLeft="@dimen/padding_dialog"
+            android:paddingRight="@dimen/padding_dialog"
+
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorBlack"
+            android:gravity="left"
+            />
+
+        <Button
+            android:id="@+id/btn_create_new_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="@dimen/padding_dialog"
+            android:layout_marginRight="@dimen/padding_dialog"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_guidline"
+
+            android:layout_marginTop="@dimen/margin_top"
+
+            android:text="Create new user"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_button"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_normal"
+
+            android:onClick="@{handler::onClickCreateNewUser}"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="@dimen/progress_bar_size_normal"
+            android:layout_height="@dimen/progress_bar_size_normal"
+
+            app:layout_constraintTop_toBottomOf="@+id/btn_create_new_user"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/margin_top"
+            android:visibility="@{viewModel.isCreating ? View.VISIBLE : View.GONE}"
+            />
+    </android.support.constraint.ConstraintLayout>
+</layout>

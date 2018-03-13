@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/label_list_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_left"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="@dimen/margin_top"
+
+        android:text="@string/list_friend"
+        android:textColor="@color/colorHighlighText"
+        android:textSize="@dimen/text_size_normal"
+        android:textStyle="bold"
+        />
+    <LinearLayout
+        android:id="@+id/ll_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="@dimen/margin_top"
+
+        app:layout_constraintTop_toBottomOf="@id/label_list_friend"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:text="@string/id"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+
+            android:text="@string/name"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:text="@string/follow"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:text="@string/delete"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_divider_height"
+
+        android:background="@color/colorItemDividerBlack"
+
+        android:layout_marginLeft="@dimen/margin_left_divider"
+        android:layout_marginRight="@dimen/margin_right_divider"
+
+        app:layout_constraintTop_toBottomOf="@id/ll_list_title"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        >
+    </android.support.v7.widget.RecyclerView>
+</android.support.constraint.ConstraintLayout>

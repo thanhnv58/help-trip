@@ -1,0 +1,22 @@
+<resources>
+    <string name="GOOGLE_MAP_API_KEY">AIzaSyD5JiiPCt_jDHXCDRDyeVcEjDGpu3qnkN4</string>
+    <string name="app_name">HelpingTrips</string>
+    <string name="create_new_user">Step 1: Connect internet\nStep 2: Click the button</string>
+    <string name="cancel">Cancel</string>
+    <string name="push_location">Push location</string>
+    <string name="push_location_guidline">(To your friend see you on map, lets push your location)</string>
+    <string name="add_friend_guidline">(To see your friend see you on map, lets add friend)</string>
+    <string name="add_friend">Add friend</string>
+    <string name="add">Add</string>
+    <string name="list_friend">Your friends</string>
+    <string name="id">Id</string>
+    <string name="name">Name</string>
+    <string name="follow">Follow</string>
+    <string name="delete">Delete</string>
+    <string name="made_by_author">Copyright \u00a9 ThanhNV</string>
+    <string name="need_push_location">You have not push your location</string>
+    <string name="open_gps">Open GPS and Push again!</string>
+    <string name="your_friend_not_push_location">Your friend has not push location!</string>
+    <string name="directoration_error">Find your friend again!</string>
+    <string name="add_friend_success">Add friend successfully.</string>
+</resources>

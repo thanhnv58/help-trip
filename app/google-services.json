@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "267764528175",
+    "firebase_url": "https://helpingtrip.firebaseio.com",
+    "project_id": "helpingtrip",
+    "storage_bucket": "helpingtrip.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267764528175:android:666de229064adade",
+        "android_client_info": {
+          "package_name": "thanhnv.com.helpingtrips"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267764528175-i2oa66aa8sholgqkoptpcfr7attus786.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "thanhnv.com.helpingtrips",
+            "certificate_hash": "8a41165d7089c27052958070c48f37de8dca7a19"
+          }
+        },
+        {
+          "client_id": "267764528175-mjvnhq1jhe5jvlf1hk2ueol1e4f08p2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpTMzjgMzjON1tbdG1lprs6_8eMXnEYto"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267764528175-mjvnhq1jhe5jvlf1hk2ueol1e4f08p2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

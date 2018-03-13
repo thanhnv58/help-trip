@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_height">56dp</dimen>
+
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+
+    <dimen name="corner_button">8dp</dimen>
+
+    <dimen name="progress_bar_size_normal">64dp</dimen>
+
+    <dimen name="image_height">36dp</dimen>
+
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_height_small">36dp</dimen>
+
+    <dimen name="item_user_height">48dp</dimen>
+    <dimen name="item_divider_height">0.6dp</dimen>
+
+    <dimen name="padding_dialog">12dp</dimen>
+    <dimen name="padding_button">1dp</dimen>
+
+    <dimen name="padding_left">4dp</dimen>
+    <dimen name="padding_right">4dp</dimen>
+
+    <dimen name="margin_top_small">8dp</dimen>
+    <dimen name="margin_top_large">16dp</dimen>
+    <dimen name="margin_top_item">8dp</dimen>
+    <dimen name="margin_bottom_item">8dp</dimen>
+
+    <dimen name="margin_left_divider">24dp</dimen>
+    <dimen name="margin_right_divider">24dp</dimen>
+
+    <dimen name="margin_left">12dp</dimen>
+    <dimen name="margin_right">12dp</dimen>
+    <dimen name="margin_top">8dp</dimen>
+    <dimen name="margin_header">20dp</dimen>
+    <dimen name="margin_floating">12dp</dimen>
+    <dimen name="margin_card">8dp</dimen>
+    <dimen name="ic_button_height">24dp</dimen>
+
+</resources>

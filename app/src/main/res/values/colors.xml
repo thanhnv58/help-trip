@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorNomalText">#000</color>
+    <color name="colorHighlighText">#009add</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorButton">#009add</color>
+    <color name="colorButtonSelected">#89b6ff</color>
+    <color name="colorIconDelete">#ff0000</color>
+    <color name="colorItemDivider">#4286f4</color>
+    <color name="colorItemDividerBlack">#000</color>
+    <color name="colorPolyline">#27A4E0</color>
+</resources>
