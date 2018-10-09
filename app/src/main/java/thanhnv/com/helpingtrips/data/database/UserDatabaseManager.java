@@ -11,8 +11,8 @@ import thanhnv.com.helpingtrips.view.application.MyApplication;
 
 /**
  * Created by Thanh on 3/5/2018.
+ * UserDatabaseManager
  */
-
 public class UserDatabaseManager {
     public static final int DUPLICATE_ID = 1;
     public static final int SUCCESS = 0;
@@ -66,17 +66,10 @@ public class UserDatabaseManager {
         userDatabase.userRepository().update(MyApplication.yourFriends.get(position));
     }
 
-    public List<User> getFollowingFriends() {
+    public int updateUser(User user) {
         if (userDatabase == null) {
-            return null;
+            return -1;
         }
-        return userDatabase.userRepository().getFollowingFriends();
-    }
-
-    public int getFollowingNumber() {
-        if (userDatabase == null) {
-            return 0;
-        }
-        return userDatabase.userRepository().getFollowingFriends().size();
+        return userDatabase.userRepository().update(user);
     }
 }

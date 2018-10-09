@@ -6,6 +6,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * Created by Thanh on 3/1/2018.
+ * MovableFloatingActionButton
+ */
 public class MovableFloatingActionButton extends FloatingActionButton implements View.OnTouchListener {
 
     private static final float CLICK_DRAG_TOLERANCE = 10; // Often, there will be a slight, unintentional, drag when the user taps the FAB, so we need to account for this.
@@ -78,12 +82,7 @@ public class MovableFloatingActionButton extends FloatingActionButton implements
             float upDX = upRawX - downRawX;
             float upDY = upRawY - downRawY;
 
-            if (Math.abs(upDX) < CLICK_DRAG_TOLERANCE && Math.abs(upDY) < CLICK_DRAG_TOLERANCE) { // A click
-                return performClick();
-            } else { // A drag
-                return true; // Consumed
-            }
-
+            return !(Math.abs(upDX) < CLICK_DRAG_TOLERANCE && Math.abs(upDY) < CLICK_DRAG_TOLERANCE) || performClick();
         } else {
             return super.onTouchEvent(motionEvent);
         }

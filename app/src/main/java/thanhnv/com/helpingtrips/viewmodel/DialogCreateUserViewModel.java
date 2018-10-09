@@ -1,29 +1,28 @@
 package thanhnv.com.helpingtrips.viewmodel;
 
-import android.content.Context;
 import android.databinding.ObservableBoolean;
 
 import thanhnv.com.helpingtrips.data.remote.FirebaseUser;
-import thanhnv.com.helpingtrips.util.Utils;
 import thanhnv.com.helpingtrips.util.firebase.MyFireBase;
-import thanhnv.com.helpingtrips.view.application.MyApplication;
-import thanhnv.com.helpingtrips.view.sharedPreference.MySharedPreference;
 
 /**
  * Created by Thanh on 3/2/2018.
+ * DialogCreateUserViewModel
  */
-
 public class DialogCreateUserViewModel implements MyFireBase.OnCreateNewUserIdListener {
 
     public ObservableBoolean isCreating = new ObservableBoolean(false);
 
-    private OnCreateNewUserListener listener;
+    private OnCreateNewUserViewModelListener onCreateNewUserViewModelListener;
 
-    public void onClickCreateBtn(Context context, OnCreateNewUserListener listener) {
-        if (!Utils.notificationConnectNetwork(context)) {
-            return;
-        }
-        this.listener = listener;
+    public DialogCreateUserViewModel() {
+    }
+
+    public void setOnCreateNewUserViewModelListener(OnCreateNewUserViewModelListener listener) {
+        this.onCreateNewUserViewModelListener = listener;
+    }
+
+    public void createNewUser() {
         isCreating.set(true);
         MyFireBase.createNewUserIdTransaction(this);
     }
@@ -34,21 +33,28 @@ public class DialogCreateUserViewModel implements MyFireBase.OnCreateNewUserIdLi
         MyFireBase.writeNewUserToDatabase(newUserId, new FirebaseUser(), new MyFireBase.OnWriteUserListener() {
             @Override
             public void onSuccess() {
-                MySharedPreference.getInstance().setApplicationId(newUserId);
-                MyApplication.applicationId = MySharedPreference.getInstance().getApplicationId();
+                if (onCreateNewUserViewModelListener != null) {
+                    onCreateNewUserViewModelListener.onSuccess(newUserId);
+                }
+
                 isCreating.set(false);
-                listener.onSuccess();
             }
 
             @Override
             public void onFail() {
-                listener.onFail();
+                if (onCreateNewUserViewModelListener != null) {
+                    onCreateNewUserViewModelListener.onFail();
+                }
             }
         });
     }
 
-    public interface OnCreateNewUserListener {
-        void onSuccess();
+    /**
+     * Created by Thanh on 3/2/2018.
+     * OnCreateNewUserViewModelListener
+     */
+    public interface OnCreateNewUserViewModelListener {
+        void onSuccess(String newId);
         void onFail();
     }
 }

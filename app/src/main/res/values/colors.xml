@@ -10,7 +10,14 @@
     <color name="colorButton">#009add</color>
     <color name="colorButtonSelected">#89b6ff</color>
     <color name="colorIconDelete">#ff0000</color>
-    <color name="colorItemDivider">#4286f4</color>
+    <color name="colorItemDivider">#009add</color>
     <color name="colorItemDividerBlack">#000</color>
     <color name="colorPolyline">#27A4E0</color>
+    <color name="grayIconTint">#727272</color>
+    <color name="colorBlue">#0000ff</color>
+    <color name="colorButtonUser">#FF4081</color>
+    <color name="colorButtonMap">#43BB7B</color>
+    <color name="colorButtonMapSelected">#6deda8</color>
+    <color name="colorGuidline">#a4a8a4</color>
+    <color name="colorScreenBackground">#EAEBEF</color>
 </resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="thanhnv.com.helpingtrips.viewmodel.DialogEditFriendViewModel"/>
+        <variable
+            name="handler"
+            type="thanhnv.com.helpingtrips.view.handler.DialogEditFriendHandler"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_dialog"
+        android:paddingTop="@dimen/padding_dialog"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/label_add_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:text="@string/friend_id"
+            android:textColor="@color/colorHighlighText"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/label_add_friend"
+
+            android:text="@{viewModel.id}"
+            android:textColor="@color/colorHighlighText"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/label_add_friend"
+
+            android:hint="@string/name"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorBlack"
+            android:maxLength="@integer/text_name_length"
+            android:singleLine="true"
+            android:text="@{viewModel.name}"
+
+            android:inputType="textCapSentences"
+
+            android:addTextChangedListener="@{viewModel.nameWatcher}"
+            />
+
+        <com.yarolegovich.discretescrollview.DiscreteScrollView
+            android:id="@+id/discrete_marker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/margin_top"
+
+            app:layout_constraintTop_toBottomOf="@id/edt_name"
+            app:adapter="@{viewModel.markerAdapter}"
+            app:position="@{viewModel.markerId}"
+            />
+
+        <ImageView
+            android:id="@+id/img_selected"
+            android:layout_width="@dimen/img_selected_size"
+            android:layout_height="@dimen/img_selected_size"
+
+            android:layout_marginTop="@dimen/margin_top"
+
+            app:layout_constraintTop_toBottomOf="@id/discrete_marker"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_selected"
+            />
+
+        <Button
+            android:id="@+id/btn_add_friend"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+
+            android:layout_margin="@dimen/margin_right"
+
+            app:layout_constraintTop_toBottomOf="@id/img_selected"
+
+            android:background="@drawable/bg_button"
+            android:text="@string/update"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+
+            android:onClick="@{handler::onClickUpdate}"
+            />
+    </android.support.constraint.ConstraintLayout>
+</layout>

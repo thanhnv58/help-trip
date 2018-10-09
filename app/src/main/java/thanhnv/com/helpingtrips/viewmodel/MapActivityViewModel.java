@@ -1,50 +1,37 @@
 package thanhnv.com.helpingtrips.viewmodel;
 
 import android.databinding.ObservableBoolean;
-import android.databinding.ObservableInt;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import thanhnv.com.helpingtrips.data.database.UserDatabaseManager;
 import thanhnv.com.helpingtrips.data.model.User;
 import thanhnv.com.helpingtrips.data.remote.FirebaseUser;
-import thanhnv.com.helpingtrips.util.Constants;
 import thanhnv.com.helpingtrips.util.firebase.MyFireBase;
 import thanhnv.com.helpingtrips.view.application.MyApplication;
 
 /**
  * Created by Thanh on 3/7/2018.
+ * MapActivityViewModel
  */
-
 public class MapActivityViewModel {
-    // observable for floating button change
-    public ObservableInt mode = new ObservableInt(Constants.MODE_MAP);
-    public ObservableBoolean hasLocation = new ObservableBoolean(true);
-
-    private List<MyFireBase.OnGetUserListener> listeners;
+    //public ObservableBoolean hasLocation = new ObservableBoolean(false);
+    public ObservableBoolean showBtnGo = new ObservableBoolean(false);
+    public ObservableBoolean isPushing = new ObservableBoolean(false);
+    public ObservableBoolean showButton = new ObservableBoolean(true);
 
     public List<User> followingFriends;
 
-    public int friendNumber;
-
     public MapActivityViewModel() {
-        if (MyApplication.lastLocation == null) {
-            hasLocation.set(false);
+        followingFriends = new ArrayList<>();
+        for (User u : MyApplication.yourFriends) {
+            if (u.isFollow()) {
+                followingFriends.add(u);
+            }
         }
-        getFollowingFriends();
     }
 
-    public void getFollowingFriends() {
-        followingFriends = UserDatabaseManager.getInstance().getFollowingFriends();
-        friendNumber = followingFriends.size();
-    }
-
-    public void setListeners(List<MyFireBase.OnGetUserListener> listeners) {
-        this.listeners = listeners;
-    }
-
-    public void showAllFollowingFriends() {
+    public void getFriendOnFirebase(List<MyFireBase.OnGetUserListener> listeners) {
         int i = 0;
 
         for (User user : followingFriends) {
@@ -56,7 +43,6 @@ public class MapActivityViewModel {
 
     public String[] getListFollowingUserName() {
         List<String> listUser = new ArrayList<>();
-        listUser.add(Constants.YOU);
         int size = MyApplication.yourFriends.size();
 
         for (int i = 0; i < size; i++) {
@@ -70,23 +56,44 @@ public class MapActivityViewModel {
         return listUser.toArray(result);
     }
 
-    public void clickYou() {
-        mode.set(Constants.MODE_YOU);
+    public void pushStart() {
+        if (!isPushing.get()) {
+            isPushing.set(true);
+        }
     }
 
-    public void clickFriend() {
-        mode.set(Constants.MODE_FRIEND);
+    public void pushDone() {
+        isPushing.set(false);
     }
 
-    public void clickMap() {
-        mode.set(Constants.MODE_MAP);
+    public void showButtonGo() {
+        showBtnGo.set(true);
+    }
+
+    public void hideButtonGo() {
+        showBtnGo.set(false);
     }
 
     public void pushYourLocation(double latitude, double longitude, MyFireBase.OnWriteUserListener listener) {
-        hasLocation.set(true);
+        //hasLocation.set(true);
         FirebaseUser newUser = new FirebaseUser();
         newUser.setLatitude(latitude);
         newUser.setLongitude(longitude);
         MyFireBase.writeNewUserToDatabase(MyApplication.applicationId, newUser, listener);
+    }
+
+    public int getMarkerId(int which) {
+        return followingFriends.get(which).getIconId();
+    }
+
+    public int getFriendNumber() {
+        if (followingFriends == null) {
+            return 0;
+        }
+        return followingFriends.size();
+    }
+
+    public void settingFloatingButton() {
+        showButton.set(!showButton.get());
     }
 }

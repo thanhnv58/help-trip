@@ -8,8 +8,8 @@ import thanhnv.com.helpingtrips.databinding.ItemUserBinding;
 
 /**
  * Created by Thanh on 3/6/2018.
+ * ItemUserViewHolder
  */
-
 public class ItemUserViewHolder extends RecyclerView.ViewHolder {
     public ItemUserBinding binding;
 

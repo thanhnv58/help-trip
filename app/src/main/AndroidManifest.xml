@@ -25,7 +25,7 @@
             />
 
         <activity
-            android:windowSoftInputMode="stateHidden"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"
             android:name=".view.activity.MainActivity">
             <intent-filter>
@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"
             android:name=".view.activity.MapActivity"/>
     </application>

@@ -11,12 +11,13 @@
         <variable
             name="handler"
             type="thanhnv.com.helpingtrips.view.handler.MainHandler"/>
-
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorScreenBackground"
         tools:context="thanhnv.com.helpingtrips.view.activity.MainActivity">
 
         <android.support.v7.widget.CardView
@@ -33,22 +34,27 @@
             >
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+
+                android:paddingTop="@dimen/padding_top"
+                >
 
                 <TextView
                     android:id="@+id/label_your_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_marginTop="@dimen/margin_header"
                     android:layout_marginLeft="@dimen/margin_left"
 
                     android:text="Your Id: "
                     android:textColor="@color/colorNomalText"
                     android:textSize="@dimen/text_size_normal"
+                    android:lines="1"
 
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
 
                 <TextView
                     android:id="@+id/txt_app_id"
@@ -56,10 +62,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.applicationId}"
 
-                    android:layout_marginTop="@dimen/margin_header"
-                    android:layout_marginRight="@dimen/margin_right"
-
-                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/label_your_id"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@color/colorHighlighText"
@@ -67,21 +70,22 @@
 
                 <LinearLayout
                     android:id="@+id/btn_push_location"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_height"
                     android:orientation="horizontal"
 
+                    android:paddingLeft="@dimen/padding_left_button"
+                    android:paddingRight="@dimen/padding_right_button"
+
                     android:layout_marginTop="@dimen/margin_top"
-                    android:layout_marginRight="@dimen/margin_right"
                     android:layout_marginLeft="@dimen/margin_left"
 
-                    app:layout_constraintLeft_toRightOf="@id/txt_app_id"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_your_id"
 
                     android:background="@drawable/bg_button"
                     android:gravity="center"
-                    android:onClick="@{handler::pushLocation}"
+                    android:onClick="@{handler::onClickPushLocation}"
                     >
                     <TextView
                         android:layout_width="wrap_content"
@@ -95,25 +99,72 @@
                     <ImageView
                         android:layout_width="@dimen/image_height"
                         android:layout_height="@dimen/ic_button_height"
-
+                        android:layout_marginLeft="@dimen/margin_left_small"
                         android:src="@drawable/ic_push_location"
+                        />
 
-                        android:layout_marginLeft="@dimen/margin_left"
+                    <ProgressBar
+                        android:layout_width="@dimen/progress_bar_size_small"
+                        android:layout_height="@dimen/progress_bar_size_small"
+                        android:layout_marginLeft="@dimen/margin_left_small"
+                        app:pushing="@{viewModel.isPushing}"
                         />
                 </LinearLayout>
+
+                <Switch
+                    android:id="@+id/toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintLeft_toRightOf="@id/btn_push_location"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    app:layout_constraintTop_toTopOf="@id/btn_push_location"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_push_location"
+
+
+                    android:layout_marginRight="@dimen/margin_right"
+                    android:onCheckedChanged="@{handler::onAutoPushLocation}"
+                    android:checked="@{viewModel.isAutoPushLocation}"
+                    />
+
                 <TextView
-                    android:id="@+id/txt_push_guidline"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:layout_marginTop="@dimen/margin_top"
                     android:layout_marginBottom="@dimen/margin_top"
 
-                    android:text="@string/push_location_guidline"
+                    android:text="@string/push_manually"
                     android:textSize="@dimen/text_size_normal"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorGuidline"
+                    android:lineSpacingExtra="@dimen/line_spacing"
 
                     android:gravity="center"
+
+                    app:layout_constraintLeft_toLeftOf="@id/btn_push_location"
+                    app:layout_constraintRight_toRightOf="@id/btn_push_location"
+
+                    app:layout_constraintTop_toBottomOf="@id/btn_push_location"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:layout_marginBottom="@dimen/margin_top"
+
+                    android:text="@string/push_manually"
+                    android:textSize="@dimen/text_size_normal"
+                    android:textColor="@color/colorGuidline"
+                    android:lineSpacingExtra="@dimen/line_spacing"
+
+                    android:gravity="center"
+
+                    app:layout_constraintLeft_toRightOf="@id/btn_push_location"
+                    app:layout_constraintRight_toRightOf="parent"
 
                     app:layout_constraintTop_toBottomOf="@id/btn_push_location"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -122,7 +173,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_add_friend"
+            android:id="@+id/card_go_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -135,98 +186,65 @@
             app:layout_constraintRight_toRightOf="parent">
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
-                <TextView
-                    android:id="@+id/label_add_friend"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
 
-                    android:paddingLeft="@dimen/margin_left"
-                    android:layout_marginTop="@dimen/margin_top"
-
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/btn_go_map"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
 
-                    android:text="@string/add_friend"
-                    android:textColor="@color/colorHighlighText"
-                    android:textSize="@dimen/text_size_normal"
-                    android:textStyle="bold"
+                    android:layout_margin="@dimen/margin_right"
+                    android:background="@color/colorButtonUser"
+
                     />
 
                 <LinearLayout
-                    android:id="@+id/ll_add_friend"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_go_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/button_height"
                     android:orientation="horizontal"
 
-                    app:layout_constraintTop_toBottomOf="@id/label_add_friend"
+                    android:layout_margin="@dimen/margin_right"
 
-                    android:layout_marginLeft="@dimen/margin_left"
-                    android:layout_marginRight="@dimen/margin_right"
-                    android:layout_marginBottom="@dimen/margin_top"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingRight="@dimen/padding_right"
 
-                    android:gravity="center"
-
-                    >
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:hint="@string/id"
-                        android:textSize="@dimen/text_size_normal"
-                        android:textColor="@color/colorBlack"
-                        android:inputType="number"
-                        android:maxLength="@integer/text_id_length"
-                        android:text="@{viewModel.id}"
-                        android:addTextChangedListener="@{viewModel.idWatcher}"
-
-                        android:nextFocusDown="@id/edt_name"
-                        android:nextFocusLeft="@id/edt_name"
-                        android:nextFocusUp="@id/edt_name"
-                        android:nextFocusRight="@id/edt_name"
-                        />
-                    <EditText
-                        android:id="@+id/edt_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-
-                        android:hint="@string/name"
-                        android:textSize="@dimen/text_size_normal"
-                        android:textColor="@color/colorBlack"
-                        android:maxLength="@integer/text_name_length"
-                        android:singleLine="true"
-                        android:text="@{viewModel.name}"
-                        android:addTextChangedListener="@{viewModel.nameWatcher}"
-                        />
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/button_height_small"
-                        android:layout_weight="1"
-
-                        android:background="@drawable/bg_button"
-                        android:text="@string/add"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"
-                        android:onClick="@{handler::onClickAddFriend}"
-                        />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_friend_guidline"
-
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:layout_marginBottom="@dimen/margin_top"
-
-                    app:layout_constraintTop_toBottomOf="@id/ll_add_friend"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
 
-                    android:textColor="@color/colorBlack"
+                    android:background="@drawable/bg_button_map"
                     android:gravity="center"
-                    />
+                    android:onClick="@{handler::onClickGoMap}"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginLeft="@dimen/margin_left"
+
+                        android:text="@string/go_map"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/colorWhite"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/image_height"
+                        android:layout_height="@dimen/ic_button_height"
+
+                        android:layout_marginRight="@dimen/margin_right"
+
+                        android:src="@drawable/ic_map"
+
+                        android:layout_marginLeft="@dimen/margin_left"
+                        />
+                </LinearLayout>
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
 
@@ -238,11 +256,11 @@
             android:layout_marginLeft="@dimen/margin_card"
             android:layout_marginRight="@dimen/margin_card"
             android:layout_marginTop="@dimen/margin_card"
-            android:layout_marginBottom="@dimen/margin_card"
+            android:layout_marginBottom="@dimen/margin_top"
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_add_friend"
+            app:layout_constraintTop_toBottomOf="@id/card_go_map"
             app:layout_constraintBottom_toTopOf="@id/author"
             >
             <android.support.constraint.ConstraintLayout
@@ -298,6 +316,19 @@
                         android:layout_weight="2"
 
                         android:text="@string/name"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+
+                        android:gravity="center"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:text="@string/icon"
                         android:textSize="@dimen/text_size_normal"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
@@ -388,30 +419,23 @@
             android:gravity="center"
             />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline_floating_btn"
+        <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.65"
-
-            />
-
-        <thanhnv.com.helpingtrips.view.customview.MovableFloatingActionButton
-            android:id="@+id/floating_button_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
+            android:layout_marginRight="@dimen/margin_floating"
             android:layout_marginBottom="@dimen/margin_floating"
 
-            app:backgroundTint="@color/colorButton"
-            android:src="@drawable/ic_map"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:backgroundTint="@color/colorButtonUser"
+            android:src="@drawable/ic_add_friend"
             app:fabSize="normal"
 
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="@id/guideline_floating_btn"
-            android:onClick="@{handler::onClickGoMap}"
+            android:onClick="@{handler::onClickAddFriend}"
+
+            app:isVisible="@{viewModel.showAddFriend}"
             />
 
     </android.support.constraint.ConstraintLayout>

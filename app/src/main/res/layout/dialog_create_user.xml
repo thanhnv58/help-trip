@@ -12,9 +12,12 @@
             type="thanhnv.com.helpingtrips.viewmodel.DialogCreateUserViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingLeft="@dimen/padding_left"
         android:paddingBottom="@dimen/padding_dialog"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -22,56 +25,61 @@
             android:id="@+id/txt_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height"
-            android:text="Create new user"
-            app:layout_constraintRight_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+
+
+            android:text="@string/create_new_user_title"
+            android:textColor="@color/colorHighlighText"
             android:textSize="@dimen/text_size_large"
-            android:textColor="@color/colorWhite"
-            android:background="@color/colorPrimary"
-            android:textStyle="bold"
-            android:gravity="center"
+
+            android:gravity="bottom"
             />
-
-        <TextView
-            android:id="@+id/txt_guidline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/create_new_user"
-
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_title"
-            android:layout_marginTop="@dimen/margin_top"
-            android:paddingLeft="@dimen/padding_dialog"
-            android:paddingRight="@dimen/padding_dialog"
-
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/colorBlack"
-            android:gravity="left"
-            />
-
-        <Button
-            android:id="@+id/btn_create_new_user"
+        <View
+            android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/item_divider_height"
 
-            android:layout_marginLeft="@dimen/padding_dialog"
-            android:layout_marginRight="@dimen/padding_dialog"
+            android:layout_marginTop="@dimen/margin_top_divider"
+
+            android:background="@color/colorItemDivider"
+            app:layout_constraintTop_toBottomOf="@id/txt_title"
+
+            />
+
+        <LinearLayout
+            android:id="@+id/btn_create_new_user"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:orientation="horizontal"
+
+            android:paddingLeft="@dimen/padding_left_button"
+            android:paddingRight="@dimen/padding_right_button"
+
+            android:layout_marginTop="@dimen/margin_header"
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_guidline"
+            app:layout_constraintTop_toBottomOf="@id/divider"
 
-            android:layout_marginTop="@dimen/margin_top"
-
-            android:text="Create new user"
-            android:textAllCaps="false"
             android:background="@drawable/bg_button"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_normal"
-
+            android:gravity="center"
             android:onClick="@{handler::onClickCreateNewUser}"
-            />
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/create_new_user"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/colorWhite"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/image_height"
+                android:layout_height="@dimen/ic_button_height"
+
+                android:src="@drawable/ic_sunrise"
+                />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progress"
@@ -82,7 +90,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="@dimen/margin_top"
-            android:visibility="@{viewModel.isCreating ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.isCreating ? View.VISIBLE : View.INVISIBLE}"
             />
     </android.support.constraint.ConstraintLayout>
 </layout>

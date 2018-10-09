@@ -5,67 +5,66 @@ import android.content.Context;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-
-import thanhnv.com.helpingtrips.R;
 
 /**
  * Created by Thanh on 3/1/2018.
+ * Utils
  */
 public class Utils {
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-    public static boolean isOpenGPS(Context context) {
-        LocationManager locationManager
-                = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean openGPS(Context context) {
-        if (!isOpenGPS(context)) {
-            toastMessage(context, context.getResources().getString(R.string.open_gps));
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        } else {
             return false;
         }
-        return true;
     }
 
-    public static boolean notificationConnectNetwork(Context context) {
-        if (!isNetworkAvailable(context)) {
-            toastMessage(context, "Connect network!!!");
-            return false;
-        }
-        return true;
-    }
+    public static boolean isGPSAvaiable(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        return locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     public static void toastMessage(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    public static void snackbarMessage(Activity activity, String message) {
+        View parentLayout = activity.findViewById(android.R.id.content);
+        Snackbar.make(parentLayout, message, Snackbar.LENGTH_SHORT).show();
+    }
+
     public static boolean checkLocation(Double latitude, Double longitude) {
-        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
-            return false;
+        return !(latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180);
+    }
+
+    public static String parseToAppId(String decimalId) {
+        try {
+            return Integer.toHexString(Integer.valueOf(decimalId)).toUpperCase();
+        } catch (NumberFormatException e) {
+            return null;
         }
-        return true;
+    }
+
+    public static String parseToAppId(int decimalId) {
+        try {
+            return Integer.toHexString(decimalId).toUpperCase();
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public static int parseToPrimaryKey(String hexId) {
+        try {
+            return Integer.valueOf(hexId, 16);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 }

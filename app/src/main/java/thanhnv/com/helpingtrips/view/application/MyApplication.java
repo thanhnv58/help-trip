@@ -8,15 +8,12 @@ import java.util.List;
 
 import thanhnv.com.helpingtrips.data.database.UserDatabaseManager;
 import thanhnv.com.helpingtrips.data.model.User;
-import thanhnv.com.helpingtrips.data.remote.FirebaseUser;
-import thanhnv.com.helpingtrips.util.Utils;
-import thanhnv.com.helpingtrips.util.firebase.MyFireBase;
-import thanhnv.com.helpingtrips.view.sharedPreference.MySharedPreference;
+import thanhnv.com.helpingtrips.util.sharedpreference.MySharedPreference;
 
 /**
  * Created by Thanh on 3/1/2018.
+ * MyApplication
  */
-
 public class MyApplication extends Application {
 
     public static String applicationId;
@@ -34,26 +31,7 @@ public class MyApplication extends Application {
         yourFriends = UserDatabaseManager.getInstance().getAllUser();
 
         if (applicationId != null) {
-            if (Utils.isNetworkAvailable(this)) {
-                MyFireBase.getUserById(applicationId, new MyFireBase.OnGetUserListener() {
-                    @Override
-                    public void onSuccess(FirebaseUser user) {
-                        if (user == null) {
-                            return;
-                        }
-
-                        if (!Utils.checkLocation(user.getLatitude(), user.getLongitude())) {
-                            return;
-                        }
-
-                        lastLocation = new LatLng(user.getLatitude(), user.getLongitude());
-                    }
-
-                    @Override
-                    public void onFail(String error) {
-                    }
-                });
-            }
+            lastLocation = MySharedPreference.getInstance().getMyLatLng();
         }
     }
 }

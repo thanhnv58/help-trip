@@ -8,8 +8,8 @@ import thanhnv.com.helpingtrips.data.repository.UserRepository;
 
 /**
  * Created by Thanh on 3/5/2018.
+ * UserDatabase
  */
-
 @Database(entities = {User.class}, version = 1)
 public abstract class UserDatabase extends RoomDatabase {
     public abstract UserRepository userRepository();

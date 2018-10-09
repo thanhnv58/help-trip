@@ -6,8 +6,8 @@ import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by Thanh on 3/5/2018.
+ * User
  */
-
 @Entity
 public class User {
     @PrimaryKey
@@ -23,6 +23,13 @@ public class User {
     private int iconId;
 
     public User() {
+    }
+
+    public User(int id, String name, boolean isFollow, int iconId) {
+        this.id = id;
+        this.name = name;
+        this.isFollow = isFollow;
+        this.iconId = iconId;
     }
 
     public int getId() {
@@ -55,5 +62,10 @@ public class User {
 
     public void setIconId(int iconId) {
         this.iconId = iconId;
+    }
+
+    public void updateUser(User user) {
+        this.name = user.getName();
+        this.iconId = user.getIconId();
     }
 }
